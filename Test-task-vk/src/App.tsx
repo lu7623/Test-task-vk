@@ -4,7 +4,7 @@ import { getGroupsWithDelay } from './api/getGroups'
 import { Group } from './api/types'
 import GroupList from './components/GroupList'
 import { GroupsContext } from './components/GroupsContext'
-import FiltersIsOpen from './components/FiltersIsOpen'
+import Filters from './components/Filters'
 
 function App() {
   const [groups, setGroups] = useState<Group[]>([])
@@ -24,7 +24,7 @@ function App() {
         <section className='main-container'>
         <GroupList groups={filtered} />
         <div className='filters-container'>
-        <FiltersIsOpen callback={setFiltered}/>  
+            <Filters callback={setFiltered} /> 
         </div>
           
           </section>

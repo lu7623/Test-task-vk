@@ -33,7 +33,22 @@
   grid-template-columns: 4fr 1fr;
 }
 
+.filters-open {
+  display: flex;
+  flex-direction: column;
+}
+
 .filters-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.show-friends {
+  text-decoration: underline;
+  color: blue;
+}
+
+.filter-colors {
   display: flex;
   flex-direction: column;
 }

@@ -18,7 +18,7 @@ export default function GroupCard({ group }: { group: Group }) {
         <p>Участники:{group.members_count}</p>
         {group.friends && <p className="friends-list">
           Друзья в группе:
-          <button onClick={()=>setShowFriends(!showFriends)}> tt</button>
+          <button className="show-friends" onClick={() => setShowFriends(!showFriends)}>{group.friends.length }</button>
            { showFriends && (group.friends?.map((friend) => (
             <div key={friend.first_name}>
               <span className="friend">{friend.first_name}</span>
