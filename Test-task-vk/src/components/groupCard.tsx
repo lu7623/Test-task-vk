@@ -6,11 +6,11 @@ export default function GroupCard({ group }: { group: Group }) {
   return (
     <>
       <div className="card">
-      {group.avatar_color && <div
+        <h2 className="group-name">{group.name.toUpperCase()}</h2>
+        {group.avatar_color && <div
           className="avatar"
           style={{ backgroundColor: group.avatar_color }}
         />}
-        <h2 className="group-name">{group.name.toUpperCase()}</h2>
         <p className="closed">
           {group.closed ? "Закрытая группа" : " Открытая группа"}
         </p>

@@ -11,15 +11,27 @@ export default function Filters({
 
   const [openGroups, setOpenGroups] = useState("allOpen");
   const [friendsInGroup, setfriendsInGroup] = useState("allFriends");
-  const [colors, setColors] = useState('allColors');
-
-  const colorsVariants = 
-    groups.filter((group) => !!group.avatar_color).map((x) => x.avatar_color);
-  colorsVariants.forEach((c, i) => { if (colorsVariants.indexOf(c) !== colorsVariants.lastIndexOf(c)) colorsVariants.splice(i, 1)})
+  const [colors, setColors] = useState("allColors");
 
   function filterOpen(event: React.ChangeEvent<HTMLInputElement>) {
     setOpenGroups(event.target.value);
   }
+
+  function filterFriends(event: React.ChangeEvent<HTMLInputElement>) {
+    setfriendsInGroup(event.target.value);
+  }
+
+  function filterColors(event: React.ChangeEvent<HTMLInputElement>) {
+    setColors(event.target.value);
+  }
+
+  const colorsVariants = groups
+    .filter((group) => !!group.avatar_color)
+    .map((x) => x.avatar_color);
+  colorsVariants.forEach((c, i) => {
+    if (colorsVariants.indexOf(c) !== colorsVariants.lastIndexOf(c))
+      colorsVariants.splice(i, 1);
+  });
 
   const filteredGroupsIsOpen = (groups: Group[]) => {
     if (openGroups === "allOpen") return groups;
@@ -28,10 +40,6 @@ export default function Filters({
     else return groups.filter((group) => group.closed);
   };
 
-  function filterFriends(event: React.ChangeEvent<HTMLInputElement>) {
-    setfriendsInGroup(event.target.value);
-  }
-
   const filteredHasFriends = (groups: Group[]) => {
     if (friendsInGroup === "allFriends") return groups;
     else if (friendsInGroup === "yes")
@@ -39,21 +47,16 @@ export default function Filters({
     else return groups.filter((group) => !group.friends);
   };
 
-  function filterColors(event: React.ChangeEvent<HTMLInputElement>) {
-    setColors(event.target.value);
-  }
-
-  const filteredAvatarColor= (groups: Group[], col: string) => {
-    if (friendsInGroup === "allColors") return groups;
-    else (friendsInGroup === col)
-      return groups.filter((group) => group.avatar_color === col);
+  const filteredAvatarColor = (groups: Group[]) => {
+    if (colors === "allColors") return groups;
+    else return groups.filter((group) => group.avatar_color === colors);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const groupsList = filteredGroupsIsOpen(groups);
     const friendsList = filteredHasFriends(groupsList);
-    const colorsList = filteredAvatarColor(friendsList, colors)
+    const colorsList = filteredAvatarColor(friendsList);
     callback(colorsList);
   };
   return (
@@ -61,94 +64,78 @@ export default function Filters({
       <form onSubmit={handleSubmit}>
         <div className="filters-open">
           <h3>Тип группы:</h3>
-          <input
-            type="radio"
-            value="allOpen"
-            id="allOpen"
-            checked={openGroups == "allOpen" ? true : false}
-            onChange={filterOpen}
-          />
-          <label htmlFor="allOpen">Все</label>
-          <input
-            type="radio"
-            value="closed"
-            name = 'friends'
-            id="closed"
-            checked={openGroups == "closed" ? true : false}
-            onChange={filterOpen}
-          />
-          <label htmlFor="closed">Закрытые</label>
-          <input
-            type="radio"
-            value="open"
-            id="open"
-            name = 'friends'
-            checked={openGroups == "open" ? true : false}
-            onChange={filterOpen}
-          />
-          <label htmlFor="open">Открытые</label>
-        
+          {[
+            ["allOpen", "Все"],
+            ["closed", "Закрытые"],
+            ["open", "Открытые"],
+          ].map((x) => {
+            return (
+                <div className="radio" key={x[0]}>
+                  <input
+                    type="radio"
+                    name="open"
+                    value={x[0]}
+                    id={x[0]}
+                    checked={openGroups == x[0] ? true : false}
+                    onChange={filterOpen}
+                  />
+                  <label htmlFor={x[0]}>{x[1]}</label>
+                </div>
+            );
+          })}
         </div>
         <div className="filters-open">
           <h3>Друзья в группе:</h3>
-          <input
-            type="radio"
-            value="allFriends"
-            id="allFriends"
-            name = 'friends'
-            checked={friendsInGroup == "allFriends" ? true : false}
-            onChange={filterFriends}
-          />
-          <label htmlFor="allFriends">Все</label>
-          <input
-            type="radio"
-            value="yes"
-            id="yes"
-            name = 'friends'
-            checked={friendsInGroup == "yes" ? true : false}
-            onChange={filterFriends}
-          />
-          <label htmlFor="closed">Есть</label>
-          <input
-            type="radio"
-            value="no"
-            id="no"
-            name = 'friends'
-            checked={friendsInGroup == "no" ? true : false}
-            onChange={filterFriends}
-          />
-          <label htmlFor="open">Нет</label>
-        
-        </div>
-
-        <div className="filter-colors">
-          <h3>Цвет аватарки</h3>
-        <input
-            type="radio"
-            value="allColors"
-            id="allColors"
-            name = 'colors'
-            checked={colors == "allColors" ? true : false}
-            onChange={filterColors}
-          />
-          <label htmlFor="allColors">Все</label>
-          {colorsVariants.map((color) => {
+          {[
+            ["allFriends", "Все"],
+            ["yes", "Есть"],
+            ["no", "Нет"],
+          ].map((x) => {
             return (
-              <>
-                 <input
-                  type="radio"
-                  name = 'colors'
-            value={color}
-            id={color}
-            checked={colors === color ? true : false}
-            onChange={filterColors}
-          />
-                <label htmlFor={color}>{color}</label>
-              </>
-            )
+                <div className="radio" key={x[0]}>
+                  <input
+                    type="radio"
+                    name="friends"
+                    value={x[0]}
+                    id={x[0]}
+                    checked={friendsInGroup == x[0] ? true : false}
+                    onChange={filterFriends}
+                  />
+                  <label htmlFor={x[0]}>{x[1]}</label>
+                </div>
+            );
           })}
         </div>
-        <button type="submit">Применить</button>
+        <div className="filter-colors">
+          <h3>Цвет аватарки</h3>
+          <div className="radio">
+            <input
+              type="radio"
+              value="allColors"
+              id="allColors"
+              name="colors"
+              checked={colors == "allColors" ? true : false}
+              onChange={filterColors}
+            />
+            <label htmlFor="allColors">Все</label>
+          </div>
+          {colorsVariants.map((color) => {
+            return (
+                <div className="radio" key={color}>
+                  <input
+                    type="radio"
+                    name="colors"
+                    value={color}
+                    id={color}
+                    checked={colors === color ? true : false}
+                    onChange={filterColors}
+                  />
+                  <label htmlFor={color}>{color}</label>
+                </div>
+            );
+          })}
+        </div>
+        <button className="submit" type="submit">Применить</button>
       </form>
     </>
   );
