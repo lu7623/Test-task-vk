@@ -57,11 +57,13 @@ export default function Filters({
     const groupsList = filteredGroupsIsOpen(groups);
     const friendsList = filteredHasFriends(groupsList);
     const colorsList = filteredAvatarColor(friendsList);
-    callback(colorsList);
+    setTimeout(() => {
+      callback(colorsList);
+    }, 1000);
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="filters-container">
         <div className="filters-open">
           <h3>Тип группы:</h3>
           {[
@@ -135,7 +137,7 @@ export default function Filters({
             );
           })}
         </div>
-        <button className="submit" type="submit">Применить</button>
+          <button className="submit" type="submit">Применить</button>
       </form>
     </>
   );

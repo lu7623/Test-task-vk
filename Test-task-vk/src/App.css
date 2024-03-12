@@ -31,8 +31,9 @@
 }
 
 .main-container {
-  display: grid;
-  grid-template-columns: 4fr 1fr;
+  display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 
 .filters-open {
@@ -42,8 +43,10 @@
 
 .filters-container {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  gap: 10px;
   margin-left: 30px;
+  justify-content: space-around;
 }
 
 .show-friends {
@@ -67,9 +70,12 @@
 .submit {
   padding: 5px 15px;
   border-radius: 3px;
-  background-color: rgb(213, 212, 212);
-  margin-top: 20px;
+  background-color: rgb(227, 224, 224);
+  margin-top: 50px;
+  width: fit-content;
+  height: fit-content;
 }
+
 
 .submit:hover, .show-friends:hover {
   cursor: pointer;

@@ -30,11 +30,9 @@ function App() {
     <>
       <GroupsContext.Provider value={groups}>
         <section className="main-container">
-          {error.length > 0 && <p style={{color: 'red'}}>{error}</p>}
-          <GroupList groups={filtered} />
-          <div className="filters-container">
             <Filters callback={setFiltered} />
-          </div>
+          {error.length > 0 && <p style={{ color: 'red' }}>{error}</p>}
+          <GroupList groups={filtered} />
         </section>
       </GroupsContext.Provider>
     </>
