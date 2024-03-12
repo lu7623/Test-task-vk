@@ -1,4 +1,5 @@
 import groups from "./groups.json" assert { type: "json" };
+import { GetGroupsResponse } from "./types";
 
 function timeout(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

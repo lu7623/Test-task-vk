@@ -1,9 +1,9 @@
-interface GetGroupsResponse {
+export interface GetGroupsResponse {
   result: 1 | 0,
   data?: Group[]
 }
 
-interface Group {
+export interface Group {
   "id": number,
   "name": string,
   "closed": boolean,
@@ -12,7 +12,7 @@ interface Group {
   "friends"?: User[]
 }
 
-interface User {
+export interface User {
   "first_name": string,
   "last_name": string
 }
