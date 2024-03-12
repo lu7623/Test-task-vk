@@ -1,0 +1,82 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  box-shadow: 5px 5px 5px rgb(94, 94, 94);
+}
+
+.card-container {
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.card {
+  padding: 1rem;
+  background-color: azure;
+  border: 1px solid rgb(165, 233, 233);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 400px;
+}
+
+.main-container {
+  display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.filters-open {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters-container {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  margin-left: 30px;
+  justify-content: space-around;
+}
+
+.show-friends {
+  text-decoration: underline;
+  color: blue;
+  border: none;
+  padding: 1px;
+  margin-left: 4px;
+}
+
+.filter-colors {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio {
+  display: flex;
+  gap: 5px;
+}
+
+.submit {
+  padding: 5px 15px;
+  border-radius: 3px;
+  background-color: rgb(227, 224, 224);
+  margin-top: 50px;
+  width: fit-content;
+  height: fit-content;
+}
+
+
+.submit:hover, .show-friends:hover {
+  cursor: pointer;
+}
