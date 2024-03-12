@@ -1,5 +1,5 @@
 import { Group } from "../api/types";
-import GroupCard from "./groupCard";
+import GroupCard from "./GroupCard";
 
 export default function GroupList({ groups }: { groups: Group[] }) {
   return (
